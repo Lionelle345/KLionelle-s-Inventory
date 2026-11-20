@@ -1,0 +1,105 @@
+K'Lionelle's Inventory - Running the App
+========================================
+
+Prerequisites
+-------------
+1. Install Node.js (npm is included).
+2. Open Windows Command Prompt or PowerShell.
+
+First-time setup
+----------------
+1. Change to the project folder:
+
+   cd "C:\Users\USER\Desktop\GAME 1\klionelles-inventory"
+
+2. Install the project dependencies:
+
+   npm install
+
+Starting the app
+----------------
+Run this command from the project folder:
+
+   npm run web
+
+This starts the Expo development server and Metro bundler. The app is
+available at:
+
+   http://localhost:8081
+
+Keep the terminal open while using the app. Stop the server with Ctrl+C.
+
+Optional: enable Firebase login
+-------------------------------
+The inventory works without Firebase. To enable account sign-in and sign-out:
+
+1. Create a Firebase project at https://console.firebase.google.com/.
+2. Register a Web app and enable Email/Password under Authentication >
+   Sign-in method.
+3. Copy .env.example to .env.local in the project folder.
+4. Replace the EXPO_PUBLIC_FIREBASE_* placeholders in .env.local with the
+   matching Firebase Web app configuration values.
+5. Restart the Expo server.
+
+Firebase Authentication stores account credentials; this app does not store
+passwords itself. The inventory and debtor data remain local to the device.
+Never put Firebase service-account keys or private server credentials in this
+client app.
+
+PowerShell execution-policy workaround
+--------------------------------------
+If PowerShell reports that npm.ps1 cannot be loaded because scripts are disabled,
+run the app through Command Prompt instead:
+
+   cmd.exe /d /c "cd /d C:\Users\USER\Desktop\GAME 1\klionelles-inventory && npm run web"
+
+You can also start the app with the npm.cmd shim:
+
+   npm.cmd run web
+
+Other supported start modes
+--------------------------
+Mobile / Expo Go:
+
+   npm start
+
+Android emulator:
+
+   npm run android
+
+iOS simulator on macOS:
+
+   npm run ios
+
+Verification
+------------
+The app was started successfully and returned HTTP status 200 at
+http://localhost:8081/ in this environment.
+
+Publishing a web link
+---------------------
+The web app is configured for static hosting and can be built with:
+
+   npx expo export --platform web
+
+The static production files are written to the dist folder. To publish them
+through Expo Hosting, first sign in to Expo from your terminal:
+
+   npx eas-cli@latest login
+
+Check that sign-in succeeded:
+
+   npx eas-cli@latest whoami
+
+Then publish a preview link:
+
+   npx eas-cli@latest deploy
+
+Publish or update the production link:
+
+   npx eas-cli@latest deploy --prod
+
+Re-run the web export before deploying after app changes. Firebase sign-in is
+not enabled until a Firebase project is configured using the steps above. The
+current app keeps inventory and debtor data on each user's device; it does not
+sync those records between users.
